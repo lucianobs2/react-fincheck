@@ -1,11 +1,19 @@
+import { Outlet } from 'react-router-dom';
 import illustration from '../../../assets/illustration.png';
 import { Logo } from '../../components/icons/Logo';
 
 export function AuthLayout() {
   return (
     <div className="flex w-full h-full">
-      <div className="flex w-full h-full">teste</div>
-      <div className="flex justify-center items-center w-1/2 h-full p-8">
+      <div className="w-full h-full flex flex-col items-center justify-center g-16 lg:w-1/2">
+        <Logo className="h-6 text-gray-500" />
+
+        <div className="w-full max-w-[504px] px-8">
+          <Outlet />
+        </div>
+      </div>
+
+      <div className="justify-center items-center w-1/2 h-full p-8 hidden lg:flex">
         <img
           src={illustration}
           alt="background-image"
@@ -13,7 +21,7 @@ export function AuthLayout() {
         />
 
         <div className="max-w-[656px] bg-white p-10 absolute bottom-8 rounded-b-4xl">
-          <Logo className="text-gray-500 h-6" />
+          <Logo className="text-teal-900 h-8" />
 
           <p className="text-gray-700 font-medium text-xl mt-6">
             Gerencie sua finanças pessoais de uma forma simples com fincheck, e
