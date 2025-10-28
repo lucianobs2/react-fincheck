@@ -1,5 +1,6 @@
 import type { ComponentProps } from 'react';
 import { cn } from '../../app/utils/cn';
+import { Spinner } from './Spinner';
 
 interface ButtonPros extends ComponentProps<'button'> {
   isLoading?: boolean;
@@ -21,6 +22,8 @@ export function Button({
         px-6 h-12 rounded-2xl font-medium text-white`,
         className
       )}
-    />
+    >
+      {isLoading ? <Spinner /> : props.children}
+    </button>
   );
 }
