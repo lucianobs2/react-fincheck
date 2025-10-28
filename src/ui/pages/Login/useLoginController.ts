@@ -1,7 +1,10 @@
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useMutation } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
 import z from 'zod';
-import { fincheckHttpClient } from '../../../app/services/fincheckHttpClient';
+import { authService } from '../../../app/services/authService';
+import type { SigninParams } from '../../../app/services/authService/signin';
 
 const schema = z.object({
   email: z.string().nonempty('E-mail é obrigatório').email('E-mail inválido'),
@@ -19,16 +22,20 @@ export function useLoginController() {
     resolver: zodResolver(schema),
   });
 
-  const handleSubmit = hookFormHandleSubmit((data) => {
-    fincheckHttpClient
-      .post('/auth/signin', data)
-      .then((response) => {
-        console.log('Login successful:', response.data);
-      })
-      .catch((error) => {
-        console.error('Login failed:', error);
-      });
+  const { mutateAsync, isPending } = useMutation({
+    mutationKey: ['signin'],
+    mutationFn: async (data: SigninParams) => authService.signin(data),
   });
 
-  return { handleSubmit, register, errors };
+  const handleSubmit = hookFormHandleSubmit(async (data) => {
+    try {
+      const { accessToken } = await mutateAsync(data);
+
+      console.log('accessToken', accessToken);
+    } catch (error) {
+      toast.error('Credenciais invalidas.');
+    }
+  });
+
+  return { handleSubmit, register, errors, isPending };
 }

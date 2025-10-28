@@ -10,6 +10,7 @@ export function Button({
   className,
   isLoading,
   disabled,
+  children,
   ...props
 }: ButtonPros) {
   return (
@@ -23,7 +24,7 @@ export function Button({
         className
       )}
     >
-      {isLoading ? <Spinner /> : props.children}
+      {isLoading ? <Spinner /> : children}
     </button>
   );
 }
