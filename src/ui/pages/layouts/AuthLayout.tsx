@@ -5,10 +5,10 @@ import { Logo } from '../../components/icons/Logo';
 export function AuthLayout() {
   return (
     <div className="flex w-full h-full">
-      <div className="w-full h-full flex flex-col items-center justify-center g-16 lg:w-1/2">
+      <div className="w-full h-full flex flex-col items-center justify-center lg:w-1/2">
         <Logo className="h-6 text-gray-500" />
 
-        <div className="w-full max-w-[504px] px-8">
+        <div className="mt-16 w-full max-w-[504px] px-8">
           <Outlet />
         </div>
       </div>
@@ -20,7 +20,7 @@ export function AuthLayout() {
           className="object-cover w-full h-full max-w-[656px] max-h-[960px] select-none rounded-4xl"
         />
 
-        <div className="max-w-[656px] bg-white p-10 absolute bottom-8 rounded-b-4xl">
+        <div className="max-w-[656px] bottom-8 bg-white p-10 absolute rounded-b-4xl">
           <Logo className="text-teal-900 h-8" />
 
           <p className="text-gray-700 font-medium text-xl mt-6">
