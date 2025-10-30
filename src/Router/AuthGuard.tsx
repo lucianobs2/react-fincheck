@@ -6,13 +6,13 @@ interface AuthGuardProps {
 }
 
 export function AuthGuard({ isPrivate }: AuthGuardProps) {
-  const { hasAuthenticated } = useAuth();
+  const { hasAccessToken } = useAuth();
 
-  if (!hasAuthenticated && isPrivate) {
+  if (!hasAccessToken && isPrivate) {
     return <Navigate to="/login" replace />;
   }
 
-  if (hasAuthenticated && !isPrivate) {
+  if (hasAccessToken && !isPrivate) {
     return <Navigate to="/" replace />;
   }
 
