@@ -26,7 +26,7 @@ export function Transactions() {
 
         <div className="mt-6 relative">
           <Swiper slidesPerView={3} centeredSlides>
-            <SliderNavigation isBeginning={false} isEnd={false} />
+            <SliderNavigation />
             {MONTHS.map((month, index) => (
               <SwiperSlide key={month}>
                 {({ isActive }) => (
