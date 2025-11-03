@@ -38,7 +38,14 @@ export function Accounts() {
 
       <div className="flex flex-col flex-1 justify-end">
         <div>
-          <Swiper spaceBetween={16} slidesPerView={2.2}>
+          <Swiper
+            spaceBetween={16}
+            slidesPerView={2.2}
+            onSlideChange={(swiper) => {
+              console.log('isStart', swiper.isBeginning);
+              console.log('isEnd', swiper.isEnd);
+            }}
+          >
             <div
               className="flex items-center justify-between mb-4"
               slot="container-start"
@@ -47,7 +54,7 @@ export function Accounts() {
                 Minhas contas
               </strong>
 
-              <AccountSliderNavigation />
+              <AccountSliderNavigation isBeginning={false} isEnd={false} />
             </div>
 
             <SwiperSlide>
