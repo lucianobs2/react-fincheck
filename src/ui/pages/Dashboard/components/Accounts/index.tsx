@@ -4,9 +4,11 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper.css';
 import { AccountCard } from './AccountCard';
 import { AccountSliderNavigation } from './AccountSliderNavigation';
+import { useAccountsController } from './useAccountsController';
 
 export function Accounts() {
   const [showAmount, setShowAmount] = useState(false);
+  const { sliderState, setSliderState, windowWidth } = useAccountsController();
 
   return (
     <div className="flex flex-col bg-teal-900 h-full w-full rounded-2xl md:p-10 px-4 py-8">
@@ -36,14 +38,16 @@ export function Accounts() {
         </div>
       </div>
 
-      <div className="flex flex-col flex-1 justify-end">
+      <div className="flex flex-col flex-1 justify-end mt-10 md:mt-0">
         <div>
           <Swiper
             spaceBetween={16}
-            slidesPerView={2.2}
+            slidesPerView={windowWidth >= 500 ? 2.1 : 1.2}
             onSlideChange={(swiper) => {
-              console.log('isStart', swiper.isBeginning);
-              console.log('isEnd', swiper.isEnd);
+              setSliderState({
+                isBeginning: swiper.isBeginning,
+                isEnd: swiper.isEnd,
+              });
             }}
           >
             <div
@@ -54,7 +58,10 @@ export function Accounts() {
                 Minhas contas
               </strong>
 
-              <AccountSliderNavigation isBeginning={false} isEnd={false} />
+              <AccountSliderNavigation
+                isBeginning={sliderState.isBeginning}
+                isEnd={sliderState.isEnd}
+              />
             </div>
 
             <SwiperSlide>
