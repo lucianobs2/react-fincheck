@@ -1,15 +1,22 @@
-import { EyeClosedIcon, EyeOpenIcon } from '@radix-ui/react-icons';
 import { useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper.css';
+import { cn } from '../../../../../app/utils/cn';
 import { currencyFormat } from '../../../../../app/utils/formatCurrency';
+import { EyeIcon } from '../../../../components/icons/EyeIcon';
 import { AccountCard } from './AccountCard';
 import { SliderNavigation } from './SliderNavigation';
 import { useAccountsController } from './useAccountsController';
 
 export function Accounts() {
   const [showAmount, setShowAmount] = useState(false);
-  const { sliderState, setSliderState, windowWidth } = useAccountsController();
+  const {
+    sliderState,
+    setSliderState,
+    windowWidth,
+    toggleValuesVisibility,
+    areValuesVisible,
+  } = useAccountsController();
 
   return (
     <div className="flex flex-col bg-teal-900 h-full w-full rounded-2xl md:p-10 px-4 py-8">
@@ -17,25 +24,21 @@ export function Accounts() {
         <span className="text-white tracking [-0.5px] block">Saldo total</span>
 
         <div className="flex items-center gap-2">
-          <strong className="text-2xl tracking-[-1px] text-white block">
+          <strong
+            className={cn(
+              'text-2xl tracking-[-1px] text-white block',
+              !areValuesVisible && 'blur-sm'
+            )}
+          >
             {currencyFormat(1000)}
           </strong>
 
-          {showAmount ? (
-            <button
-              className="cursor-grab w-8 h-8 flex items-center justify-center"
-              onClick={() => setShowAmount(!showAmount)}
-            >
-              <EyeOpenIcon className="text-white" />
-            </button>
-          ) : (
-            <button
-              className="cursor-grabbing w-8 h-8 flex items-center justify-center"
-              onClick={() => setShowAmount(!showAmount)}
-            >
-              <EyeClosedIcon className="text-white" />
-            </button>
-          )}
+          <button
+            className="cursor-grabbing w-8 h-8 flex items-center justify-center"
+            onClick={() => toggleValuesVisibility()}
+          >
+            <EyeIcon open={!areValuesVisible} />
+          </button>
         </div>
       </div>
 
