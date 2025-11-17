@@ -3,5 +3,5 @@ import { useDashboard } from '../../../../components/DashboardContext/useDashboa
 export function useTransactionsController() {
   const { areValuesVisible } = useDashboard();
 
-  return { areValuesVisible };
+  return { areValuesVisible, isLoading: true };
 }
