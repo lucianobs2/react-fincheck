@@ -2,6 +2,7 @@ import { EyeClosedIcon, EyeOpenIcon } from '@radix-ui/react-icons';
 import { useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper.css';
+import { currencyFormat } from '../../../../../app/utils/formatCurrency';
 import { AccountCard } from './AccountCard';
 import { SliderNavigation } from './SliderNavigation';
 import { useAccountsController } from './useAccountsController';
@@ -17,7 +18,7 @@ export function Accounts() {
 
         <div className="flex items-center gap-2">
           <strong className="text-2xl tracking-[-1px] text-white block">
-            R$ 1000,00
+            {currencyFormat(1000)}
           </strong>
 
           {showAmount ? (
